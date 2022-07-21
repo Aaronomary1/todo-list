@@ -9,6 +9,10 @@ body{
     height: 95vh;
     align-items: center;
 }
+label{
+    font-weight:bold;
+    font-size: 12px;
+}
 input,
 select{
     padding: 20px 10px 20px 10px;
@@ -31,6 +35,8 @@ button{
     border-radius: 5px;
     width: 165px;
     font-weight: bolder;
+    cursor:pointer;
+    
 }
 input:focus,
 select:focus {
@@ -45,26 +51,28 @@ select:focus {
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
     scrollbar-width: none;  /* Firefox */
     box-shadow: 0px 3px 6px #888888;
-    margin:15px;
     height:75vh;
 }
-@media only screen and (max-width:900px){ 
-    #main-container{
-    width:90vw;
 
+@media only screen and (max-width:900px){ 
+    body{
+        margin: 0px;
 }   
 }
-#main-container::-webkit-scrollbar { 
+
+#main-container::-webkit-scrollbar,
+#list-menu::-webkit-scrollbar { 
     display: none;  /* Safari and Chrome */
 }
 #header{
     display:flex;
     border-bottom:1px solid #DFDFDF;
-    padding:15px;
+    padding:10px;
     position:sticky;
     top:0;
     background-color: white;
     gap:15px;
+    margin-bottom:15px;
 }
 #newlist-img{
     content:url('./newlist.png');
@@ -75,6 +83,14 @@ select:focus {
     content:url('./lists.png');
     height:25px;
     width:25px;
+}
+.edittodo-img{
+    content:url('./edit.png');
+    height:15px;
+    width:15px;
+    margin-top: -70px;
+    margin-right: -20px;
+    cursor:pointer;
 }
 #complete-img{
     content:url('./archive.png');
@@ -103,12 +119,30 @@ select:focus {
     margin-left:auto;
     bottom:15px;
     right:15px;
-    box-shadow: 0px 3px 6px #888888;
-    margin-top:-50px;
+    margin-top:30px;
+    cursor: pointer;
+    user-select: none;
+}
+#lists-button, #complete-button, #newlist-button{
+    cursor:pointer;
+}
+@media only screen and (max-width:900px){ 
+    #add-new{
+        position:fixed;
+}   
 }
 #tasks-container{
     min-height:67vh;
-    padding: 0px 15px 0px 15px;
+    padding: 0px 10px 0px 10px;
+    display:flex;
+    flex-direction: column;
+    gap:10px;
+}
+@media only screen and (max-width:900px){ 
+    #main-container, body{
+        width:100vw;
+        height: 100vh;
+}   
 }
 #no-tasks{
     position: absolute;
@@ -125,8 +159,10 @@ select:focus {
     width: 260px;
     justify-content: center;
 }
-#listname{
-    width:155px;
+#dynamic-list{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 .form{
     background-color:white;
@@ -138,16 +174,13 @@ select:focus {
     border-radius: 5px;
 }
 .popup-container{
-    width: 113vw;
-    height: 115vh;
-    position: absolute;
+    width: 100vw;
+    height: 105vh;
+    position: fixed;
     display: none;
     align-items: center;
     justify-content: center;
     background-color: #000000b0;
-    margin-bottom: -47px;
-    width: 100%;
-    height: 100%;
 }
 .button{
     width:65px;
@@ -158,21 +191,105 @@ select:focus {
     justify-content: center;
     flex-direction: column;
 }
+.list-button{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 10px 20px 10px;
+    width: 240px;
+    font-weight: bolder;
+    border-radius: 5px;
+    border: none;
+    background-color: #F1F1F1;
+    box-shadow: 0px 3px 6px #888888;
+    cursor: pointer;
+}
 .button-label{
     margin:0px;
     font-size:12px;
     font-weight:bold;
 }
 .color-input{
-    width: 65px;
+    width: 152px;
     height: 65px;
     appearance: none;
     cursor: pointer;
     padding:0px;
     background-color: transparent;
-    box-shadow: none;
+    border:3px solid;
 }
 .color-input::-webkit-color-swatch{
     border-radius:5px;
     border:none;
+}
+/* todo css */
+.todo{
+    background-color: #F2F2F2;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+}
+.task-info{
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    flex:15;
+}
+.task-text{
+    margin:0px;
+    font-weight:100;
+    font-size:15px;
+}
+.task-date{
+    margin:0px;
+    font-weight:100;
+    font-size:12px;
+}
+.task-list{
+    display: flex;
+    gap:10px;
+    font-weight:100;
+    font-size:12px;
+    align-items: center;
+    flex:4;
+    text-align: right;
+}
+.list-color{
+    max-width:15px;
+    height:15px;
+    background-color:#4c8bf5;
+    border-radius: 10px;
+    flex:55%;
+    min-width: 15px;
+}
+.todo-input{
+    padding:0;
+    width:13px;
+    font-weight: none;
+    border-radius: none;
+    border: none;
+    background-color: #F1F1F1;
+    box-shadow: none;
+    flex:1;
+}
+.list-name{
+    flex:45%;
+}
+/* Form css */
+.error-message{
+    background: #ff3d3d;
+    padding: 16px;
+    width: 228px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    overflow-wrap: break-word;
+    display:none;
+}
+#list-menu{
+    overflow: scroll;
+    max-height: 300px;
 }

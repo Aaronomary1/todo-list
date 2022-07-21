@@ -25,7 +25,7 @@
         </div>
 
         <div id="tasks-container">
-            <h2 id="no-tasks">No tasks! <br> Click the + button to create a task.</h2>
+            <h2 id="no-tasks" style="display:none">No tasks! <br> Click the + button to create a task.</h2>
         </div>
         <!-- add new button -->
         <div id="add-new" class="button">
@@ -34,28 +34,62 @@
     </div>
 
     <!-- new task form -->
-    <div class="popup-container">
+    <div class="popup-container" id="newtask-form-container" style="display:none">
         <form id="newtask-form" class="form">
-            <input placeholder="Describe task...">
-            <select name="cars" id="cars">
-                <option value="" disabled selected hidden>Choose a list</option>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
-              </select>
-            <input type="date" placeholder="Due date">
-            <button>Create Task</button>
+            <div id="newtask-error" class="error-message"></div>
+            <input type="text" placeholder="Describe task..." id="task-description" required>
+            <select name="lists" id="list-select">
+                <option value="none" selected disabled hidden>Pick a List</option>
+            </select>
+            <input type="date" placeholder="Due date" id="task-date" required>
+            <input type="hidden" id="task-color" name="task-color" value="">
+            <button type="submit" id="newtask-submit">Create Task</button>
+        </form>
+    </div>
+    <!-- edit task form -->
+    <div class="popup-container" id="edittask-form-container" style="display:none">
+        <form id="edittask-form" class="form">
+            <div id="edittask-error" class="error-message"></div>
+            <input type="text" placeholder="Describe task..." id="edit-task-description" required>
+            <select name="lists" id="edit-list-select">
+                <option value="none" selected disabled hidden>Pick a List</option>
+            </select>
+            <input type="date" placeholder="Due date" id="edit-task-date" required>
+            <input type="hidden" id="todo-id" name="todo-id" value="">
+            <button type="submit" id="edittask-submit">Edit Task</button>
         </form>
     </div>
     <!-- new list form -->
+    <div class="popup-container" id="newlist-form-container">
+        <form id="newlist-form" class="form">
+            <div id="newlist-error" class="error-message"></div>
+            <label for="newlist-color">List Color</label><br>
+            <input type="color" placeholder="List color" id="newlist-color" class="color-input" value="#4c8bf5"required>
+            <input type="text" placeholder="List Name" id="newlist-name" required>
+            <button type="submit" id="newlist-submit">Create List</button>
+        </form>
+    </div>
+
+    <!-- delete list form -->
     <div class="popup-container">
+        <div id="newlist-error" class="error-message"></div>
         <form id="newlist-form" class="form">
             <h2 style="text-align:center">Delete list and all associated tasks?</h2>
             <button>Delete list</button>
         </form>
     </div>
-    <!--  -->
+    <!-- choose list menu -->
+    <div class="popup-container" id="list-menu-container" style="display:none">
+        <div id="list-menu" class="form">
+            <div class="list-button" id="default">
+                <p class="button-label">All Lists</p>
+                <img id="lists-img" style="margin-top: -7px; margin-bottom: -4px;">
+            </div>
+            <div id="dynamic-list">
+
+            </div>
+        </div>
+    </div>
     <script src="main.js"></script>
 </body>
 </html>
