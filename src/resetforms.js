@@ -13,5 +13,6 @@ const resetForms = function(){
     document.getElementById("newlist-error").style.display = "none";
     document.getElementById("list-menu-container").style.display = "none";
     document.getElementById("list-select").value = "none";
+    document.getElementById("list-name-length").innerText = "";
 }
 export { resetForms };

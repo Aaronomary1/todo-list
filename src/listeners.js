@@ -58,7 +58,7 @@ const listeners = function(){
     let defaultListButton = document.getElementById("default");
     let editTaskForm = document.getElementById("edittask-form-container");
     let editTaskFormInner = document.getElementById("edittask-form");
-
+    let newListInput = document.getElementById("newlist-name");
     editTaskForm.addEventListener('click', function(event){
         if (!editTaskFormInner.contains(event.target)){
             resetForms();
@@ -112,6 +112,9 @@ const listeners = function(){
             newTaskImg.style.transform = "rotate(45deg)";
         }
     })
+    newListInput.addEventListener('keyup', function(){
+        document.getElementById("list-name-length").innerText = `${(newListInput.value).length}/10`
+    })
     newListSubmit.addEventListener('click', function(event){
         event.preventDefault();
         let errors = [];
@@ -126,6 +129,9 @@ const listeners = function(){
         }
         if (newListName === ""){
             errors.push("List Name is Required.")
+        }
+        if (newListName.length > 10){
+            errors.push(`List Name is too long. ${newListName.length}/10`)
         }
         if (errors.length > 0) {
             event.preventDefault();

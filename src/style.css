@@ -236,6 +236,7 @@ select:focus {
     flex-direction: column;
     gap:10px;
     flex:15;
+    overflow-wrap:anywhere;
 }
 .task-text{
     margin:0px;
@@ -276,6 +277,7 @@ select:focus {
 }
 .list-name{
     flex:45%;
+    overflow-wrap:normal;
 }
 /* Form css */
 .error-message{
@@ -292,4 +294,11 @@ select:focus {
 #list-menu{
     overflow: scroll;
     max-height: 300px;
+}
+#list-name-length{
+    margin-left: auto;
+    margin-bottom: -29px;
+    z-index: 100;
+    font-weight: bold;
+    color: #7a7a7a;
 }
