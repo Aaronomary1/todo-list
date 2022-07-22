@@ -1,13 +1,13 @@
-import { lists, todos } from './todofactory';
+import { lists, todos, saveData } from './todofactory';
 import { editListeners } from './listeners';
 import { resetForms } from './resetforms';
 
 const clearLists = function(){
     let listMenu = document.getElementById("dynamic-list");
-    let dynamicOptions = document.getElementsByClassName("dynamic-option")
-    for (let i = 0; i < dynamicOptions.length; i++){
-        dynamicOptions[i].remove();
-    }
+    let dynamicOptions = document.querySelectorAll(".dynamic-option")
+    dynamicOptions.forEach(element => {
+        element.remove();
+    });
     listMenu.innerHTML = "";
 }
 const clearTodos = function(){
@@ -111,20 +111,21 @@ const renderTodos = function(listName){
         if (listName === "default" || listName === undefined){
             noTasksMessage.innerText = `There are currently no tasks.`; 
         } else {
-            noTasksMessage.innerText = `There are currently no "${listName}" tasks.`;
+            noTasksMessage.innerText = `Nothing in "${listName}".`;
         }
         noTasksMessage.setAttribute("id", "no-tasks");
         tasksContainer.append(noTasksMessage);
     }
     editListeners();
+    saveData();
 }
 
 const renderLists = function(){
+    resetForms();
     clearLists();
     lists.forEach(function(list){
         appendList(list)
     })
-    resetForms();
 }
 
 

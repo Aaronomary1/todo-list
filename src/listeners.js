@@ -3,7 +3,6 @@ import { resetForms } from './resetforms';
 import { todos, lists, createTodo, updateTodo, createList } from './todofactory';
 import { editForm } from './editform';
 let listName = "default";
-let counter = 0;
 const editListeners = function(){
     todos.forEach(function(todo){
         if (todo.check === false && (todo.list === listName || listName === "default")){
@@ -28,6 +27,8 @@ const editListeners = function(){
                 todo.check = false;
                 renderTodos(listName);
             })
+        } else {
+            return;
         }
     })
 }
@@ -38,7 +39,6 @@ const listListeners = function(){
             listName = list.name;
             renderTodos(listName);
             resetForms();
-            console.log("Im a little bit buggy" + counter++)
         })
     })
 }
